@@ -17,7 +17,7 @@ class TestAutomationEnvironment {
     @Test
     fun runTest() {
         WebTest(config).apply {
-            driver {
+            driver(true) {
                 // write your code
             }
         }

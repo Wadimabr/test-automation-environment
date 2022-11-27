@@ -18,7 +18,25 @@ class TestAutomationEnvironment {
     fun runTest() {
         WebTest(config).apply {
             driver {
-                // write your code
+                val didYouKnowLink = "xpath"
+                val pageTitle = "xpath"
+
+                WebTest(config).apply {
+                    driver(false) {
+                        get("https://en.wikipedia.org/wiki/Main_Page")
+                        waitUntilPageIsLoaded()
+                        waitThenClick(didYouKnowLink)
+                        waitMillis(100)
+                        waitUntilPageIsLoaded()
+                        waitUntilDisplayed(pageTitle)
+
+                        val title = getText(pageTitle)
+                            .filter { it.isWhitespace() or it.isLetterOrDigit() }
+                            .replace(' ', '_')
+
+                        takeScreenshot(title)
+                    }
+                }
             }
         }
     }

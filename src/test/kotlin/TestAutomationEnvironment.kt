@@ -16,27 +16,23 @@ class TestAutomationEnvironment {
 
     @Test
     fun runTest() {
+        val didYouKnowLink = "xpath"
+        val pageTitle = "xpath"
+
         WebTest(config).apply {
-            driver {
-                val didYouKnowLink = "xpath"
-                val pageTitle = "xpath"
+            driver(true) {
+                get("https://en.wikipedia.org/wiki/Main_Page")
+                waitUntilPageIsLoaded()
+                waitThenClick(didYouKnowLink)
+                waitMillis(100)
+                waitUntilPageIsLoaded()
+                waitUntilDisplayed(pageTitle)
 
-                WebTest(config).apply {
-                    driver(false) {
-                        get("https://en.wikipedia.org/wiki/Main_Page")
-                        waitUntilPageIsLoaded()
-                        waitThenClick(didYouKnowLink)
-                        waitMillis(100)
-                        waitUntilPageIsLoaded()
-                        waitUntilDisplayed(pageTitle)
+                val title = getText(pageTitle)
+                    .filter { it.isWhitespace() or it.isLetterOrDigit() }
+                    .replace(' ', '_')
 
-                        val title = getText(pageTitle)
-                            .filter { it.isWhitespace() or it.isLetterOrDigit() }
-                            .replace(' ', '_')
-
-                        takeScreenshot(title)
-                    }
-                }
+                takeScreenshot(title)
             }
         }
     }

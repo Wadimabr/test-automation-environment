@@ -1,3 +1,5 @@
+@file:Suppress("unused", "UnusedReceiverParameter")
+
 package utils
 
 import kotlinx.coroutines.delay

@@ -1,3 +1,5 @@
+@file:Suppress("unused", "UnusedReceiverParameter")
+
 package utils
 
 import kotlinx.coroutines.delay
@@ -169,7 +171,7 @@ fun WebDriver.getDocumentScrollDimensions(): Dimension = (this as JavascriptExec
     Dimension(width, height)
 }
 
-fun WebDriver.elementVisibleInViewport(element: WebElement): Boolean =
+fun WebDriver.isElementVisibleInViewport(element: WebElement): Boolean =
     (this as JavascriptExecutor).executeScript(
         "let elem = arguments[0],                 "
             + "  box = elem.getBoundingClientRect(),    "
